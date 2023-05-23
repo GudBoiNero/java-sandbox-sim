@@ -20,7 +20,7 @@ public class Game extends ApplicationAdapter {
 		MAP_SIZE = new Vector2(VIEWPORT_SIZE.x / cellSize, VIEWPORT_SIZE.y / cellSize);
 	}
 
-	private ArrayList<ArrayList<Integer>> map;
+	private Grid map;
 
 	private SpriteBatch batch;
 	private OrthographicCamera camera;

@@ -1,14 +1,12 @@
 package com.gudboinero.sandbox;
 
-public class Cell {
-    enum Type {
-        AIR, WATER, DIRT, GRASS, SAND
-    }
+import com.badlogic.gdx.math.Vector2;
 
-    public final Type type;
+public abstract class Cell {
+    public final CellType type = CellType.NONE;
     public int age = 0;
 
-    public Cell(Type t) {
-        type = t;
+    public void move(Vector2 pos, Grid map) {
+
     }
 }
