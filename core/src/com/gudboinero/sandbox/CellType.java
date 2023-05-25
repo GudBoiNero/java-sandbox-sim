@@ -1,5 +1,5 @@
 package com.gudboinero.sandbox;
 
 public enum CellType {
-    NONE, AIR, WATER, DIRT, GRASS, SAND
+    NONE, DIRT, WATER, SAND
 }
