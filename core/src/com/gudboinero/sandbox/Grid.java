@@ -31,14 +31,17 @@ public class Grid {
 
     public void physicsUpdate(float deltaTime) {
         //#region update cells
+        ArrayList<Cell> updatedCells = new ArrayList<>();
         for (int yi = (int) this.GRID_SIZE.y - 1; yi >= 0; yi--) {
             for (int xi = 0; xi < this.GRID_SIZE.x; xi++) {
                 Vector2 pos = new Vector2(xi, yi);
                 Cell cell = getCell(pos);
 
-                Vector2 newPos = cell.getMove(this, pos);
+                if (updatedCells.contains(cell)) continue;
 
-                swapCell(newPos, pos);
+                updatedCells.add(cell);
+
+                swapCell(cell.getMove(this, pos), pos);
             }
         }
         //#endregion

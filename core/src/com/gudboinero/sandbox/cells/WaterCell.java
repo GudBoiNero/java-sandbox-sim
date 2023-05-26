@@ -11,7 +11,7 @@ import java.util.Random;
 public class WaterCell extends Cell {
     private int direction = new Random().nextInt(2) == 0 ? -1 : 1; // Left or Right
     public WaterCell() {
-        super(CellType.WATER, 1, 1, 0, new Color().fromHsv(180, 0.5f, 1f));
+        super(CellType.LIQUID, 1, new Color().fromHsv(180, 0.5f, 1f));
     }
 
     @Override
@@ -44,12 +44,10 @@ public class WaterCell extends Cell {
             direction = -direction;
         }
 
-        posDir = new Vector2(curPos.x + direction, curPos.y);
+        posDir = new Vector2(curPos.x - direction, curPos.y);
         cellDir = grid.getCell(posDir);
         if (canMove(grid, curPos, cellDir)) {
             return posDir;
-        } else {
-            direction = -direction;
         }
 
 

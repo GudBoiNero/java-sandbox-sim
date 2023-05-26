@@ -8,7 +8,7 @@ import com.gudboinero.sandbox.Grid;
 
 public class SandCell extends Cell {
     public SandCell() {
-        super(CellType.SAND, 0, 2, 0, new Color(0.6f, 0.6f, 0.9f, 1f));
+        super(CellType.SOLID, 2, new Color(0.6f, 0.6f, 0.9f, 1f));
     }
 
     @Override

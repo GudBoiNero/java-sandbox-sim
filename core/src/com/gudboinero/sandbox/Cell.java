@@ -9,24 +9,13 @@ import java.util.Enumeration;
 
 public class Cell {
     private final CellType type;
-    private final float weight;
     private final float density;
     private final Color color;
-    private int age;
 
-    public Cell(CellType type, float weight, float density, int age, Color color) {
+    public Cell(CellType type, float density, Color color) {
         this.type = type;
         this.color = color;
-        this.weight = weight;
         this.density = density;
-        this.age = age;
-    }
-
-    public Cell(CellType type, Color color) {
-        this.type = type;
-        this.color = color;
-        this.weight = 0;
-        this.density = 0;
     }
 
     public Vector2 getMove(Grid grid, Vector2 curPos) {
@@ -36,31 +25,30 @@ public class Cell {
     public boolean canMove(Grid grid, Vector2 curPos, Cell toCell) {
         Cell cell = grid.getCell(curPos);
         if (toCell != null) {
-            if (toCell.getDensity() < cell.getDensity()) {
-                return true;
-            }
+            return toCell.getDensity() < cell.getDensity();
         }
         return false;
+    }
+
+    public Cell up(Grid grid, Vector2 curPos) {
+        return grid.getCell(new Vector2(curPos.x, curPos.y - 1));
     }
 
     public CellType getType() {
         return type;
     }
 
-    public float getWeight() {
-        return weight;
-    }
-
     public float getDensity() {
         return density;
     }
 
-    public int getAge() {
-        return age;
+    public Color getColor(Grid grid, Vector2 curPos) {
+        return this.color.add(getLightValue(grid, curPos));
     }
 
-    public Color getColor() {
-        return this.color;
+    public Color getLightValue(Grid grid, Vector2 curPos) {
+
+        return new Color();
     }
 }
 

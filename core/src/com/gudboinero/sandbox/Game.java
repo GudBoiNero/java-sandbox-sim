@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.gudboinero.sandbox.cells.DirtCell;
+import com.gudboinero.sandbox.cells.EmptyCell;
 import com.gudboinero.sandbox.cells.SandCell;
 import com.gudboinero.sandbox.cells.WaterCell;
 
@@ -64,6 +65,10 @@ public class Game extends ApplicationAdapter {
 			map.putCell(new Vector2(mousePos.x / CELL_SIZE, mousePos.y / CELL_SIZE), new WaterCell());
 		}
 
+		if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+			map.setCell(new Vector2(mousePos.x / CELL_SIZE, mousePos.y / CELL_SIZE), new EmptyCell());
+		}
+
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin(); // Start drawing pixmap
@@ -86,7 +91,7 @@ public class Game extends ApplicationAdapter {
 
 				for (int xp = 0; xp < CELL_SIZE; xp++) {
 					for (int yp = 0; yp < CELL_SIZE; yp++) {
-						pixmap.drawPixel((xi * CELL_SIZE) + xp, (yi * CELL_SIZE) + yp, cell.getColor().toIntBits());
+						pixmap.drawPixel((xi * CELL_SIZE) + xp, (yi * CELL_SIZE) + yp, cell.getColor(map, new Vector2(xi, yi)).toIntBits());
 					}
 				}
 			}
