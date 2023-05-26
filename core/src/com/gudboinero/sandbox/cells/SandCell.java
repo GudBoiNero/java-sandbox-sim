@@ -15,28 +15,28 @@ public class SandCell extends Cell {
     public Vector2 getMove(Grid grid, Vector2 curPos) {
         // Check for bottom cell plus bottom left and right cells
         Vector2 bPos = new Vector2(curPos.x, curPos.y + 1);
-        Vector2 brPos = new Vector2(curPos.x + 1, curPos.y + 1);
-        Vector2 blPos = new Vector2(curPos.x - 1, curPos.y + 1);
+        Vector2 blPos = new Vector2(curPos.x - 1, curPos.y + 1), brPos = new Vector2(curPos.x + 1, curPos.y + 1);
+        Vector2 lPos = new Vector2(curPos.x - 1, curPos.y), rPos = new Vector2(curPos.x + 1, curPos.y);
 
         Cell b = grid.getCell(bPos); // Below
-        Cell br = grid.getCell(brPos); // Below Right
-        Cell bl = grid.getCell(blPos); // Below Left
+        Cell bl = grid.getCell(blPos), br = grid.getCell(brPos); // Below Right and Below Left
+        Cell l = grid.getCell(lPos), r = grid.getCell(rPos); // Right and Left
 
-        if (b != null) {
-            if (b.getDensity() < getDensity()) {
-                return bPos;
-            }
+        // Below
+        if (canMove(grid, curPos, b)) {
+            return bPos;
         }
-        if (bl != null) {
-            if (bl.getDensity() < getDensity()) {
-                return blPos;
-            }
+
+        // Below Right or Right
+        if (canMove(grid, curPos, r) && canMove(grid, curPos, br)) {
+            return brPos;
         }
-        if (br != null) {
-            if (br.getDensity() < getDensity()) {
-                return brPos;
-            }
+
+        // Below Left or Left
+        if (canMove(grid, curPos, l) && canMove(grid, curPos, bl)) {
+            return blPos;
         }
+
         return super.getMove(grid, curPos);
     }
 }

@@ -43,11 +43,22 @@ public class Cell {
     }
 
     public Color getColor(Grid grid, Vector2 curPos) {
-        return this.color.add(getLightValue(grid, curPos));
+        return new Color(color.r, color.g, color.b, color.a).add(getLightValue(grid, curPos));
+    }
+
+    public Color getRawColor() {
+        return color;
     }
 
     public Color getLightValue(Grid grid, Vector2 curPos) {
+        Cell cell = grid.getCell(curPos);
+        Cell up = cell.up(grid, curPos);
 
+        if (up != null && cell.getType() != CellType.NONE) {
+            if (up.getType() == CellType.NONE) {
+                return new Color().fromHsv(300, 50, 10);
+            }
+        }
         return new Color();
     }
 }

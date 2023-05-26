@@ -27,13 +27,13 @@ public class DirtCell extends Cell {
 
     @Override
     public Color getColor(Grid grid, Vector2 curPos) {
-        Color color = super.getColor(grid, curPos);
+        Color color = super.getRawColor();
 
         if (hasGrass(grid, curPos)) {
             color = new Color().fromHsv(2, 0.5f, 1f);
         }
 
-        return color.add(getLightValue(grid, curPos));
+        return new Color(color.r, color.g, color.b, color.a).add(getLightValue(grid, curPos));
     }
 
     public boolean hasSunlight(Grid grid, Vector2 curPos) {

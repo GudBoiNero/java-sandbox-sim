@@ -16,40 +16,40 @@ public class WaterCell extends Cell {
 
     @Override
     public Vector2 getMove(Grid grid, Vector2 curPos) {
-        // Check for bottom cell plus bottom left and right cells
+        // Check for bottom cell plus bottom dir and right cells
 
-        Vector2 posDown = new Vector2(curPos.x, curPos.y + 1);
-        Cell cellDown = grid.getCell(posDown);
+        Vector2 down = new Vector2(curPos.x, curPos.y + 1);
+        Vector2 dir = new Vector2(curPos.x + direction, curPos.y);
+        Vector2 downDir = new Vector2(curPos.x + direction, curPos.y + 1);
+
+        Cell cellDown = grid.getCell(down);
+        Cell cellDir = grid.getCell(dir);
+        Cell cellDownDir = grid.getCell(downDir);
+
         if (canMove(grid, curPos, cellDown)) {
-            return posDown;
+            return down;
         }
 
-        Vector2 posDownLeft = new Vector2(curPos.x - 1, curPos.y + 1);
-        Cell cellDownLeft = grid.getCell(posDownLeft);
-        if (canMove(grid, curPos, cellDownLeft)) {
-            return posDownLeft;
-        }
-
-        Vector2 posDownRight = new Vector2(curPos.x + 1, curPos.y + 1);
-        Cell cellDownRight = grid.getCell(posDownRight);
-        if (canMove(grid, curPos, cellDownRight)) {
-            return posDownRight;
-        }
-
-        Vector2 posDir = new Vector2(curPos.x + direction, curPos.y);
-        Cell cellDir = grid.getCell(posDir);
+        // Check `direction` side
         if (canMove(grid, curPos, cellDir)) {
-            return posDir;
-        } else {
-            direction = -direction;
+            if (canMove(grid, curPos, cellDownDir)) {
+                return downDir;
+            }
+            return dir;
         }
+        direction = -direction;
 
-        posDir = new Vector2(curPos.x - direction, curPos.y);
-        cellDir = grid.getCell(posDir);
+        // Check opposite side
+        dir.x = curPos.x + direction;
+        downDir.x = curPos.x + direction;
+        cellDir = grid.getCell(dir);
+        cellDownDir = grid.getCell(downDir);
         if (canMove(grid, curPos, cellDir)) {
-            return posDir;
+            if (canMove(grid, curPos, cellDownDir)) {
+                return downDir;
+            }
+            return dir;
         }
-
 
         return super.getMove(grid, curPos);
     }
