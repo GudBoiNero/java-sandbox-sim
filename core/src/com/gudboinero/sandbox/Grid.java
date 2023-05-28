@@ -37,7 +37,7 @@ public class Grid {
                 Vector2 pos = new Vector2(xi, yi);
                 Cell cell = getCell(pos);
 
-                if (updatedCells.contains(cell)) continue;
+                if (updatedCells.contains(cell) || cell == null) continue;
 
                 updatedCells.add(cell);
 

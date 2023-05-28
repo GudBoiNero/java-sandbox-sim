@@ -11,6 +11,7 @@ public class Cell {
     private final CellType type;
     private final float density;
     private final Color color;
+    // Determines difference in color between each cell
 
     public Cell(CellType type, float density, Color color) {
         this.type = type;
@@ -43,7 +44,7 @@ public class Cell {
     }
 
     public Color getColor(Grid grid, Vector2 curPos) {
-        return new Color(color.r, color.g, color.b, color.a).add(getLightValue(grid, curPos));
+        return new Color(color.r, color.g, color.b, color.a);
     }
 
     public Color getRawColor() {
@@ -56,7 +57,7 @@ public class Cell {
 
         if (up != null && cell.getType() != CellType.NONE) {
             if (up.getType() == CellType.NONE) {
-                return new Color().fromHsv(300, 50, 10);
+                return new Color().fromHsv(300, 0, 0.1f);
             }
         }
         return new Color();

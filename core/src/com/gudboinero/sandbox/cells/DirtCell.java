@@ -33,7 +33,7 @@ public class DirtCell extends Cell {
             color = new Color().fromHsv(2, 0.5f, 1f);
         }
 
-        return new Color(color.r, color.g, color.b, color.a).add(getLightValue(grid, curPos));
+        return new Color(color.r, color.g, color.b, color.a);
     }
 
     public boolean hasSunlight(Grid grid, Vector2 curPos) {
